@@ -30,18 +30,17 @@ fn main() {
 
 fn get_fibonacci_recursive(n:u32) -> u64 {
 	match n {
-		0     => panic!("zero is not a right argument!"),
-		1 | 2 => 1,
-		3     => 2,
+		0     => 0,
+		1     => 1,
         _     => get_fibonacci_recursive(n - 1) + get_fibonacci_recursive(n - 2)
     }
 }
 
 fn get_fibonacci_non_recursive(n:u32) -> u64 {
-    if n == 0 {
-        panic!("zero is not a right argument!");
-    } else if n == 1 {
-        return 1;
+    match n {
+        0 => return 0,
+        1 => return 1,
+        _ => {},
     }
 
     let mut sum = 0;
