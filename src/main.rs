@@ -28,19 +28,19 @@ fn main() {
     }
 }
 
-fn get_fibonacci_recursive(n:u32) -> u64 {
-	match n {
-		0     => 0,
-		1     => 1,
-        _     => get_fibonacci_recursive(n - 1) + get_fibonacci_recursive(n - 2)
+fn get_fibonacci_recursive(n: u32) -> u64 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => get_fibonacci_recursive(n - 1) + get_fibonacci_recursive(n - 2),
     }
 }
 
-fn get_fibonacci_non_recursive(n:u32) -> u64 {
+fn get_fibonacci_non_recursive(n: u32) -> u64 {
     match n {
         0 => return 0,
         1 => return 1,
-        _ => {},
+        _ => {}
     }
 
     let mut n_2 = 0;
