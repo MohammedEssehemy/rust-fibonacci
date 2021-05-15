@@ -45,14 +45,13 @@ fn get_fibonacci_non_recursive(n: u32) -> u64 {
 
     let mut n_2 = 0; // zero
     let mut n_1 = 1; // one
-    let mut sum = 1;
 
-    // loop starting from 2 and to n+1 exclusive
+    // loop starting from 2 and to n inclusive
     for _i in 2..=n {
-        sum = n_2 + n_1;
+        let sum = n_2 + n_1;
         n_2 = n_1;
         n_1 = sum;
     }
 
-    sum
+    n_1
 }
