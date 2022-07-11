@@ -1,13 +1,16 @@
-use std::io;
+use std::{
+    io,
+    time::Instant
+};
+use fibonacci_series::{fibonacci_non_recursive, fibonacci_recursive};
 
 fn main() {
     println!("Fibonacci Series");
 
     loop {
-        println!("please input a number");
+        println!("please input a positive number:");
 
         let mut target = String::new();
-
         io::stdin()
             .read_line(&mut target)
             .expect("failed to read line");
@@ -15,43 +18,19 @@ fn main() {
         if target.trim() == "exit" {
             break;
         }
-        let target: u32 = match target.trim().parse() {
+        let target = match target.trim().parse::<u32>() {
             Ok(num) => num,
             Err(_) => continue,
         };
+        let start = Instant::now();
+        let result = fibonacci_non_recursive(target);
+        let elapsed_time = start.elapsed().as_micros();
+        println!("Non-recursive took {:.3e} µs and the result is {}", elapsed_time, result);
 
-        let result = get_fibonacci_non_recursive(target);
-        println!("the result non recursive is {}", result);
-
-        let result = get_fibonacci_recursive(target);
-        println!("the result recursive is {}", result);
+        let start = Instant::now();
+        let result = fibonacci_recursive(target);
+        let elapsed_time = start.elapsed().as_micros();
+        println!("Recursive took {:.3e} µs and the result is {}", elapsed_time, result);
     }
 }
 
-fn get_fibonacci_recursive(n: u32) -> u64 {
-    match n {
-        0 => 0,
-        1 => 1,
-        _ => get_fibonacci_recursive(n - 1) + get_fibonacci_recursive(n - 2),
-    }
-}
-
-fn get_fibonacci_non_recursive(n: u32) -> u64 {
-    match n {
-        0 => return 0,
-        1 => return 1,
-        _ => {}
-    }
-
-    let mut n_2 = 0; // zero
-    let mut n_1 = 1; // one
-
-    // loop starting from 2 and to n inclusive
-    for _i in 2..=n {
-        let sum = n_2 + n_1;
-        n_2 = n_1;
-        n_1 = sum;
-    }
-
-    n_1
-}
