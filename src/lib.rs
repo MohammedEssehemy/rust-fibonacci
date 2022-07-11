@@ -1,4 +1,5 @@
-pub fn fibonacci_recursive(n: u32) -> u64 {
+#[no_mangle]
+pub extern fn fibonacci_recursive(n: u32) -> u64 {
     match n {
         0 => 0,
         1 => 1,
@@ -6,7 +7,8 @@ pub fn fibonacci_recursive(n: u32) -> u64 {
     }
 }
 
-pub fn fibonacci_non_recursive(n: u32) -> u64 {
+#[no_mangle]
+pub extern fn fibonacci_non_recursive(n: u32) -> u64 {
     match n {
         0 => return 0,
         1 => return 1,
